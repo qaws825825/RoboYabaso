@@ -7,6 +7,8 @@ require('fs').readdirSync('./roll/').forEach(function(file) {
 	}
   });
 
+var ReplyCount = 0; //跟上回話用全域變數_整數
+var ReplyString;    //跟上回話用全域變數_字串
 //用來呼叫骰組,新增骰組的話,要寫條件式到下面呼叫 
 //格式是 exports.骰組檔案名字.function名
 function parseInput(rplyToken, inputStr) {
@@ -89,7 +91,20 @@ function parseInput(rplyToken, inputStr) {
 	if (trigger.match(/鴨霸獸|巴獸/) != null) return exports.funny.randomReply() ;	
 	if (trigger.match(/運氣|運勢/) != null) return exports.funny.randomLuck(mainMsg) ; //占卜運氣		
 	
-
+		if (trigger != ReplyString)
+	{
+		console.log(trigger);
+		console.log(ReplyString);
+		ReplyString = trigger;
+		ReplyCount = 1;
+	}
+	else
+	{
+		console.log(ReplyCount);
+		ReplyCount++;
+		if (ReplyCount >= 3) return exports.SA_Script.ReplyMsg(trigger);
+			
+	}
 	
 	/*tarot 指令
 	if (trigger.match(/猜拳/) != null) {
