@@ -91,7 +91,7 @@ function parseInput(rplyToken, inputStr) {
 	if (trigger.match(/鴨霸獸|巴獸/) != null) return exports.funny.randomReply() ;	
 	if (trigger.match(/運氣|運勢/) != null) return exports.funny.randomLuck(mainMsg) ; //占卜運氣		
 	
-		if (trigger != ReplyString)
+	if (trigger != ReplyString)
 	{
 		console.log(trigger);
 		console.log(ReplyString);
