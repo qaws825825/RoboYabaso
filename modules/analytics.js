@@ -102,7 +102,11 @@ function parseInput(rplyToken, inputStr) {
 	{
 		console.log(ReplyCount);
 		ReplyCount++;
-		if (ReplyCount >= 3) return exports.SA_Script.ReplyMsg(trigger);
+		if (ReplyCount >= 3) 
+		{
+			ReplyCount = 1;
+			return exports.SA_Script.ReplyMsg(trigger);
+		}
 			
 	}
 	
