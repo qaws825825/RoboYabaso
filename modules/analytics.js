@@ -91,23 +91,12 @@ function parseInput(rplyToken, inputStr) {
 	if (trigger.match(/鴨霸獸|巴獸/) != null) return exports.funny.randomReply() ;	
 	if (trigger.match(/運氣|運勢/) != null) return exports.funny.randomLuck(mainMsg) ; //占卜運氣		
 	
-	if (trigger != ReplyString)
+	if (exports.SA_Script.IsNeedReply(trigger)) 
 	{
-		console.log(trigger);
-		console.log(ReplyString);
-		ReplyString = trigger;
-		ReplyCount = 1;
-	}
-	else
-	{
-		console.log(ReplyCount);
-		ReplyCount++;
-		if (ReplyCount >= 3) 
-		{
-			ReplyCount = 1;
-			return exports.SA_Script.ReplyMsg(trigger);
-		}
-			
+		if (Math.floor(Math.random()*100) <= 87) //87%機率重覆回話)
+			return exports.SA_Script.ReplyMsg(trigger); //重覆回話
+		else
+			return exports.funny.BStyleFlagSCRIPTS(); 
 	}
 	
 	/*tarot 指令
