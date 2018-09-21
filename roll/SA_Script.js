@@ -21,6 +21,8 @@ function BaKaLanguage()
 	rply.text = rplyArr[Math.floor((Math.random() * (rplyArr.length)) + 0)];
 	return rply;
 }
+
+
 function IsNeedReply(trigger)
 {
 	if (trigger != ReplyString)
