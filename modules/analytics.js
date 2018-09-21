@@ -99,6 +99,8 @@ function parseInput(rplyToken, inputStr) {
 			return exports.funny.BStyleFlagSCRIPTS(); 
 	}
 	if (trigger.match(/幹話|江西話/) != null) return exports.SA_Script.BaKaLanguage();
+	
+	if (trigger.match(/87/) != null) return exports.SA_Script.Recall87();
 	/*tarot 指令
 	if (trigger.match(/猜拳/) != null) {
 		return RockPaperScissors(inputStr, mainMsg[1]);
