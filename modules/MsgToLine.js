@@ -25,7 +25,7 @@ function sendMsgToLine(sendToken, sendVal, options) {
 	messages: [sendVal]
 	}
 	let sendJson = JSON.stringify(sendObj); 
-	consolt.log(sendJson);
+	console.log(sendJson);
 	var request = https.request(options, function(response) {
 //	console.log('Status: ' + response.statusCode);
 //	console.log('Headers: ' + JSON.stringify(response.headers));
