@@ -13,10 +13,20 @@ require('fs').readdirSync(__dirname + '/modules/').forEach(function(file) {
   }
 });
 
-var options = {
+var rplyOptions = {
 	host: 'api.line.me',
 	port: 443,
 	path: '/v2/bot/message/reply',
+	method: 'POST',
+	headers: {
+	'Content-Type': 'application/json',
+	'Authorization':'Bearer ' + channelAccessToken
+	}
+}
+var sendOptions = {
+	host: 'api.line.me',
+	port: 443,
+	path: '/v2/bot/message/push',
 	method: 'POST',
 	headers: {
 	'Content-Type': 'application/json',
@@ -49,13 +59,31 @@ app.post('/', jsonParser, function(req, res) {
 	}
 	//把回應的內容,掉到replyMsgToLine.js傳出去
 	if (rplyVal) {
-	exports.replyMsgToLine.replyMsgToLine(rplyToken, rplyVal, options); 
+	exports.MsgToLine.replyMsgToLine(rplyToken, rplyVal, rplyOptions); 
 	} else {
 	//console.log('Do not trigger'); 
 	}
 	res.send('ok');
 });
-
+app.post('/cmd', jsonParser, function(req, res) {
+	var cmdType = req.query.type,
+		cmdUser = req.query.userId;
+	console.log(req.query);
+	if (!cmdUser) cmdUser = 'U08c1a7a2d49868a14f459e5a3b3854b8';
+	if (!cmdType) cmdType = 'text';
+	switch (cmdType) {
+	case 'text':
+		exports.MsgToLine.sendMsgToLine(cmdUser, {"type": cmdType,"text": req.query.msg}, sendOptions);
+		break;
+	case 'sticker':
+		exports.MsgToLine.sendMsgToLine(cmdUser, {"type": cmdType, "stickerId": req.query.stickerId, "packageId": req.query.packageId}, sendOptions);
+		break;
+	case 'image':
+		exports.MsgToLine.sendMsgToLine(cmdUser, {"type": cmdType, "originalContentUrl": req.query.originalContentUrl, "previewImageUrl": req.query.previewImageUrl}, sendOptions);
+		break;
+	}
+	res.send('ok');
+});
 app.listen(app.get('port'), function() {
 	console.log('Node app is running on port', app.get('port'));
 });
