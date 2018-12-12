@@ -6,6 +6,7 @@ function replyMsgToLine(rplyToken, rplyVal, options) {
 	
 	}
 	let rplyJson = JSON.stringify(rplyObj); 
+	console.log(rplyJson);
 	var request = https.request(options, function(response) {
 //	console.log('Status: ' + response.statusCode);
 //	console.log('Headers: ' + JSON.stringify(response.headers));
